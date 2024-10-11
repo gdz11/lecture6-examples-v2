@@ -1,18 +1,17 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Book } from '../shared/models/book';
+import { Component } from '@angular/core';
 import { BookService } from '../shared/services/book.service';
-import { FormGroup, FormControl, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms'
-
-
-
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Book } from '../shared/models/book';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-book-list',
+  standalone: true,
+  imports: [ReactiveFormsModule, AsyncPipe],
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  styleUrl: './book-list.component.css'
 })
-export class BookListComponent implements OnInit {
-
+export class BookListComponent {
   titleUniqueValidator: AsyncValidatorFn = (contorl: AbstractControl) => {
     const value = contorl.value;
     let result = this.booksService.checkBookExists(value).then(c => {
@@ -66,5 +65,4 @@ export class BookListComponent implements OnInit {
 
     this.books2 = this.booksService.getBooks();
   }
-
 }

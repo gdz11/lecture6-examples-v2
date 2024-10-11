@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Book } from '../shared/models/book';
 import { BookSearchService } from '../shared/services/book-search.service';
-import { FormGroup, FormControl } from '@angular/forms'
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-book-search',
+  standalone: true,
+  imports: [ReactiveFormsModule, AsyncPipe],
   templateUrl: './book-search.component.html',
-  styleUrls: ['./book-search.component.css']
+  styleUrl: './book-search.component.css'
 })
-export class BookSearchComponent implements OnInit {
+export class BookSearchComponent {
 
   books?: Promise<Book[]>;
 
@@ -17,7 +20,7 @@ export class BookSearchComponent implements OnInit {
     author: new FormControl('')
   });
 
-  onSearchBook(){
+  onSearchBook() {
     let value = this.form.value;
 
     this.books = this.searchService.findBook({
@@ -32,5 +35,4 @@ export class BookSearchComponent implements OnInit {
   ngOnInit(): void {
     this.onSearchBook();
   }
-
 }

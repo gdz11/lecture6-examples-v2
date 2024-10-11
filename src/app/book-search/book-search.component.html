@@ -6,9 +6,11 @@
 </form>
 
 <div style="display: table;">
-    <div *ngFor="let book of books | async" class="book-row">
-        <div class="cell">{{book.id}}</div>
-        <div class="cell">{{book.title}}</div>
-        <div class="cell">{{book.author}}</div>
-    </div>
+    @for(book of books | async; track book.id){
+        <div class="book-row">
+            <div class="cell">{{book.id}}</div>
+            <div class="cell">{{book.title}}</div>
+            <div class="cell">{{book.author}}</div>
+        </div>
+    }
 </div>

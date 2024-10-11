@@ -4,18 +4,21 @@
 <button type="submit">Add</button>
 </form>
 
-<div *ngFor="let book of books" class="book-row">
-    <div class="cell">{{book.id}}</div>
-    <div class="cell">{{book.title}}</div>
-    <div class="cell">{{book.author}}</div>
-</div>
-
-<br><br>
-<h2>using async pipe</h2>
-<div style="display: table;">
-    <div *ngFor="let book of books2 | async" class="book-row">
+@for(book of books; track book.id){
+    <div class="book-row">
         <div class="cell">{{book.id}}</div>
         <div class="cell">{{book.title}}</div>
         <div class="cell">{{book.author}}</div>
     </div>
+}
+<br><br>
+<h2>using async pipe</h2>
+<div style="display: table;">
+    @for(book of books2 | async; track book.id){
+        <div class="book-row">
+            <div class="cell">{{book.id}}</div>
+            <div class="cell">{{book.title}}</div>
+            <div class="cell">{{book.author}}</div>
+        </div>
+    }
 </div>
